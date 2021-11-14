@@ -2,11 +2,19 @@ const express = require("express");
 
 const app = express();
 
-app.use("/", (req, res, next) => {
+const router = express.Router();
+
+router.route("/").get((req, res, next) => {
   res.status(200).json({
-    message: "I am live now!",
+    message: "Live here",
   });
 });
+
+router.route("/test").get((req, res, next) => {
+  res.status(200).json({ message: "testing here", user: "piyush" });
+});
+
+app.use("/", router);
 
 const port = process.env.PORT || 5000;
 
